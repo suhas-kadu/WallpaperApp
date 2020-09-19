@@ -1,10 +1,12 @@
 import 'package:Wallpaper/model/categories_model.dart';
 
+String apiKey = "563492ad6f917000010000018dcebf506f3f42dd8becbd0eebbccb06";
+
 List<CategoriesModel> getCategories() {
   List<CategoriesModel> categories = new List();
   CategoriesModel categorieModel = new CategoriesModel();
 
-   categorieModel.imgUrl =
+  categorieModel.imgUrl =
       "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500";
   categorieModel.categoriesName = "Nature";
   categories.add(categorieModel);
