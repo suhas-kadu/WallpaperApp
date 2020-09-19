@@ -47,7 +47,12 @@ class _CategoriesState extends State<Categories> {
       ),
       body: SingleChildScrollView(
         //controller: controller,
-        child: wallpapersList(wallpapers: wallpapers,context: context)
+        child: Column(
+          children: <Widget>[
+            wallpapersList(wallpapers: wallpapers,context: context),
+            
+          ],
+        )
       ), 
     );
   }

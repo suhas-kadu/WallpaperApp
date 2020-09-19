@@ -4,13 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 Widget brandName() {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    crossAxisAlignment: CrossAxisAlignment.center,
-    children: <Widget>[Text("Wallpaper")],
-  );
-  /*
-  RichText(
+  return  RichText(
     text: TextSpan(
       children: <TextSpan>[
         TextSpan(
@@ -20,7 +14,7 @@ Widget brandName() {
     ),
     
   );
-  */
+  
 }
 
 Widget wallpapersList({List<WallpaperModel> wallpapers, context}) {
