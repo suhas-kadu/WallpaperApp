@@ -21,16 +21,19 @@ class _SearchState extends State<Search> {
 
   getSearchWallpapers(String query) async {
     var url =
-        "https://api.pexels.com/v1/search?query=$query&per_page=14&page=1";
-    var response = await http.get(url, headers: {"Authorization": apiKey});
-    //print(response.body.toString());
+        "https://api.pexels.com/v1/search?query=$query&per_page=30&page=1";
+    var response = await http.get(url, headers: {"Authorization": apiKey}).then((response) {
 
-    Map<String, dynamic> jsonData = jsonDecode(response.body);
+      Map<String, dynamic> jsonData = jsonDecode(response.body);
     jsonData["photos"].forEach((element) {
       //print(element);
       WallpaperModel wallpaperModel = new WallpaperModel();
       wallpaperModel = WallpaperModel.fromMap(element);
       wallpapers.add(wallpaperModel);
+    });
+    //print(response.body.toString());
+
+    
     });
     setState(() {});
   }
@@ -84,6 +87,7 @@ class _SearchState extends State<Search> {
                 height: 30,
               ),
               wallpapersList(wallpapers: wallpapers, context: context),
+              SizedBox(height: 15,)
             ],
           ),
         ),
