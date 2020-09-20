@@ -14,8 +14,8 @@ class _ImageViewState extends State<ImageView> {
       body: Stack(
         children: <Widget>[
           Hero(
-            tag: widget.imgUrl,
-                      child: Container(
+              tag: widget.imgUrl,
+              child: Container(
               //Height of mobile display
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,

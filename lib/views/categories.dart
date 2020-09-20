@@ -16,12 +16,11 @@ class Categories extends StatefulWidget {
 
 class _CategoriesState extends State<Categories> {
   List<WallpaperModel> wallpapers = new List();
-  getSearchWallpapers(String query) async {
+  getSearchWallpapers() async {
     var url =
-        "https://api.pexels.com/v1/search?query=$query&per_page=14&page=1";
-    var response = await http.get(url, headers: {"Authorization": apiKey});
-    //print(response.body.toString());
-
+        "https://api.pexels.com/v1/search?query=${widget.CategorieName}&per_page=30&page=2";
+    var response = await http.get(url, headers: {"Authorization": apiKey}).then((response) {
+      
     Map<String, dynamic> jsonData = jsonDecode(response.body);
     jsonData["photos"].forEach((element) {
       //print(element);
@@ -29,12 +28,15 @@ class _CategoriesState extends State<Categories> {
       wallpaperModel = WallpaperModel.fromMap(element);
       wallpapers.add(wallpaperModel);
     });
+    //print(response.body.toString());
+
+    });
     setState(() {});
   }
 
   @override
   void initState() {
-    getSearchWallpapers(widget.CategorieName);
+    getSearchWallpapers();
     super.initState();
   }
 
@@ -50,6 +52,7 @@ class _CategoriesState extends State<Categories> {
         child: Column(
           children: <Widget>[
             wallpapersList(wallpapers: wallpapers,context: context),
+            SizedBox(height: 15,)
             
           ],
         )

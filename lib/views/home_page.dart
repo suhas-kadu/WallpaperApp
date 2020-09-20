@@ -22,17 +22,28 @@ class _HomePageState extends State<HomePage> {
 
   TextEditingController searchController = new TextEditingController();
 
-  getTrendingWallpapers() async {
-    var url = "https://api.pexels.com/v1/curated?per_page=22&page=1";
-    var response = await http.get(url, headers: {"Authorization": apiKey});
-    //print(response.body.toString());
+  ScrollController _scrollController = new ScrollController();
 
+  int noOfImageToLoad = 30;
+  int page = 1;
+
+  getTrendingWallpapers() async {
+    var url =
+        "https://api.pexels.com/v1/curated?per_page=$noOfImageToLoad&page=4";
+    //   https://api.pexels.com/v1/curated?per_page=$noOfImageToLoad&page=$page
+     await http
+        .get(url, headers: {"Authorization": apiKey}).then((response) {
+          
     Map<String, dynamic> jsonData = jsonDecode(response.body);
     jsonData["photos"].forEach((element) {
       //print(element);
       WallpaperModel wallpaperModel = new WallpaperModel();
       wallpaperModel = WallpaperModel.fromMap(element);
       wallpapers.add(wallpaperModel);
+        });
+
+
+      //print(response.body.toString());
     });
     setState(() {});
   }
@@ -43,6 +54,13 @@ class _HomePageState extends State<HomePage> {
     getTrendingWallpapers();
     categories = getCategories();
     super.initState();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        noOfImageToLoad = noOfImageToLoad + 30;
+        getTrendingWallpapers();
+      }
+    });
   }
 
   @override
@@ -111,6 +129,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               wallpapersList(wallpapers: wallpapers, context: context),
+              SizedBox(height: 15,),
             ],
           ),
         ),
