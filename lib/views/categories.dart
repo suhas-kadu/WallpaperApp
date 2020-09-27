@@ -19,17 +19,16 @@ class _CategoriesState extends State<Categories> {
   getSearchWallpapers() async {
     var url =
         "https://api.pexels.com/v1/search?query=${widget.CategorieName}&per_page=30&page=2";
-    var response = await http.get(url, headers: {"Authorization": apiKey}).then((response) {
-      
-    Map<String, dynamic> jsonData = jsonDecode(response.body);
-    jsonData["photos"].forEach((element) {
-      //print(element);
-      WallpaperModel wallpaperModel = new WallpaperModel();
-      wallpaperModel = WallpaperModel.fromMap(element);
-      wallpapers.add(wallpaperModel);
-    });
-    //print(response.body.toString());
-
+    var response = await http
+        .get(url, headers: {"Authorization": apiKey}).then((response) {
+      Map<String, dynamic> jsonData = jsonDecode(response.body);
+      jsonData["photos"].forEach((element) {
+        //print(element);
+        WallpaperModel wallpaperModel = new WallpaperModel();
+        wallpaperModel = WallpaperModel.fromMap(element);
+        wallpapers.add(wallpaperModel);
+      });
+      //print(response.body.toString());
     });
     setState(() {});
   }
@@ -48,15 +47,15 @@ class _CategoriesState extends State<Categories> {
         elevation: 0.0,
       ),
       body: SingleChildScrollView(
-        //controller: controller,
-        child: Column(
-          children: <Widget>[
-            wallpapersList(wallpapers: wallpapers,context: context),
-            SizedBox(height: 15,)
-            
-          ],
-        )
-      ), 
+          //controller: controller,
+          child: Column(
+        children: <Widget>[
+          wallpapersList(wallpapers: wallpapers, context: context),
+          SizedBox(
+            height: 15,
+          )
+        ],
+      )),
     );
   }
 }
