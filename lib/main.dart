@@ -1,7 +1,6 @@
 import 'package:Wallpaper/views/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
-
+//import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() => runApp(MyApp());
 
