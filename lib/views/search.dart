@@ -51,47 +51,55 @@ class _SearchState extends State<Search> {
     return Scaffold(
       appBar: AppBar(
         title: brandName(),
+        backgroundColor: Colors.white,
+        elevation: 0.0,
+        centerTitle: true,
+        iconTheme: IconThemeData(
+          color: Colors.black87,
+        ),
         
       ),
       body: SingleChildScrollView(
-        child: Container(
-          child: Column(
+          child: Container(
+            child: Column(
+      children: <Widget>[
+        Container(
+          
+          decoration: BoxDecoration(
+            color: Colors.grey[100],
+            //Color(0xfff5f8fd),
+            borderRadius: BorderRadius.circular(50),
+            //borderRadius: BorderRadius.circular(10),
+          ),
+          padding: EdgeInsets.symmetric(horizontal: 20, ),
+          margin: EdgeInsets.symmetric(horizontal: 20,),
+          child: Row(
             children: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.grey[100],
-                  //Color(0xfff5f8fd),
-                  borderRadius: BorderRadius.circular(50),
-                ),
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                margin: EdgeInsets.symmetric(horizontal: 20),
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: TextField(
-                        controller: searchController,
-                        decoration: InputDecoration(hintText: "search"),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        getSearchWallpapers(searchController.text);
-                      },
-                      child: Container(child: Icon(Icons.search,),
-                      ),
-                    ),
-                  ],
+              Expanded(
+                child: TextField(
+                  controller: searchController,
+                  decoration: InputDecoration(hintText: "search"),
                 ),
               ),
-              SizedBox(
-                height: 30,
+              InkWell(
+                onTap: () {
+                  getSearchWallpapers(searchController.text);
+                },
+                child: Container(child: Icon(Icons.search,),
+                ),
               ),
-              wallpapersList(wallpapers: wallpapers, context: context),
-              SizedBox(height: 15,)
             ],
           ),
         ),
-      ),
+        SizedBox(
+          height: 30,
+        ),
+        wallpapersList(wallpapers: wallpapers, context: context),
+        SizedBox(height: 15,)
+      ],
+            ),
+          ),
+        ),
     );
   }
 }

@@ -2,25 +2,33 @@ import 'package:Wallpaper/model/wallpaper_model.dart';
 import 'package:Wallpaper/views/image_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 
 Widget brandName() {
-  return  RichText(
-    text: TextSpan(
-      children: <TextSpan>[
-        TextSpan(
-            text: 'Wallpaper',
-            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20)),
-      ],
+  return  Container(
+    margin: EdgeInsets.only(top: 25,),
+    child: RichText(
+      text: TextSpan(
+        
+        children: <TextSpan>[
+          TextSpan(
+              text: 'Wallpaper',
+              style: GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 20, color: Colors.black)),
+          TextSpan(
+              text: 'App',
+              style: GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 20, color: Colors.blue)),
+        ],
+      ),
     ),
-    
   );
-  
 }
+
 
 Widget wallpapersList({List<WallpaperModel> wallpapers, context}) {
   return Container(
     child: GridView.count(
-        padding: EdgeInsets.only(top: 20, left: 10, right: 10),
+        padding: EdgeInsets.only(top:14, left: 10, right: 10),
         crossAxisCount: 2,
         childAspectRatio: 0.55,
         mainAxisSpacing: 6,
@@ -37,7 +45,7 @@ Widget wallpapersList({List<WallpaperModel> wallpapers, context}) {
                         builder: (context) => ImageView(
                               imgUrl: wallpaper.src.portrait,
                             )));
-              },
+                          },
               child: Hero(
                 tag: wallpaper.src.portrait,
                 child: Container(
