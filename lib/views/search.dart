@@ -57,8 +57,7 @@ class _SearchState extends State<Search> {
         iconTheme: IconThemeData(
           color: Colors.black87,
         ),
-        
-      ),
+        ),
       body: SingleChildScrollView(
           child: Container(
             child: Column(
@@ -68,17 +67,19 @@ class _SearchState extends State<Search> {
           decoration: BoxDecoration(
             color: Colors.grey[100],
             //Color(0xfff5f8fd),
-            borderRadius: BorderRadius.circular(50),
+              borderRadius: BorderRadius.circular(50),
+              border: Border.all(color: Colors.grey.withOpacity(0.1)),
+
             //borderRadius: BorderRadius.circular(10),
           ),
           padding: EdgeInsets.symmetric(horizontal: 20, ),
-          margin: EdgeInsets.symmetric(horizontal: 20,),
+          margin: EdgeInsets.only(left: 10,right: 10,top: 10,),
           child: Row(
             children: <Widget>[
               Expanded(
                 child: TextField(
                   controller: searchController,
-                  decoration: InputDecoration(hintText: "search"),
+                  decoration: InputDecoration(hintText: "search",border: InputBorder.none),
                 ),
               ),
               InkWell(
@@ -92,7 +93,7 @@ class _SearchState extends State<Search> {
           ),
         ),
         SizedBox(
-          height: 30,
+          height: 15,
         ),
         wallpapersList(wallpapers: wallpapers, context: context),
         SizedBox(height: 15,)

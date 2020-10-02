@@ -7,10 +7,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 Widget brandName() {
   return  Container(
-    margin: EdgeInsets.only(top: 25,),
+    //margin: EdgeInsets.only(top: 25,),
     child: RichText(
       text: TextSpan(
-        
         children: <TextSpan>[
           TextSpan(
               text: 'Wallpaper',
@@ -28,7 +27,7 @@ Widget brandName() {
 Widget wallpapersList({List<WallpaperModel> wallpapers, context}) {
   return Container(
     child: GridView.count(
-        padding: EdgeInsets.only(top:14, left: 10, right: 10),
+        padding: EdgeInsets.only(top:10, left: 10, right: 10),
         crossAxisCount: 2,
         childAspectRatio: 0.55,
         mainAxisSpacing: 6,
