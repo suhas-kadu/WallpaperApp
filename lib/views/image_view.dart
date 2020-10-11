@@ -1,9 +1,9 @@
-import 'dart:ui';
+//import 'dart:ui';
 import 'dart:typed_data';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:url_launcher/url_launcher.dart';
+//import 'package:url_launcher/url_launcher.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 //import 'package:random_string/random_string.dart';
 import 'package:dio/dio.dart';
@@ -36,6 +36,7 @@ class _ImageViewState extends State<ImageView> {
                 child: CachedNetworkImage(
                   imageUrl: widget.imgUrl,
                   fit: BoxFit.cover,
+                  //placeholder: (context, url) => Center(child: CircularProgressIndicator()),
                   //color: Color(0xfff5f8fd),
                   //progressIndicatorBuilder: CircularProgressIndicator(context ),
                 ),
@@ -51,7 +52,7 @@ class _ImageViewState extends State<ImageView> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     _save();
                   },
@@ -76,7 +77,7 @@ class _ImageViewState extends State<ImageView> {
                           borderRadius: BorderRadius.circular(30),
                           gradient: LinearGradient(colors: [
                             Colors.black26,
-                            Colors.black45,
+                            Colors.black38,
                             Colors.black26,
                           ],
                           )
@@ -102,7 +103,7 @@ class _ImageViewState extends State<ImageView> {
                 SizedBox(
                   height: 15,
                 ),
-                GestureDetector(
+                InkWell(
                     onTap: () {
                       Navigator.pop(context);
                     },

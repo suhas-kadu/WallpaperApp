@@ -48,8 +48,9 @@ dev_dependencies:
 
 flutter_native_splash: 
   image: lib/assets/flutter_logo.png
-  #color: ffffff
-  color: 282a36
+  color: ffffff
+  fill: true
+  #color: 282a36
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
