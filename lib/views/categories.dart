@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:Wallpaper/data/data.dart';
 import 'package:Wallpaper/model/wallpaper_model.dart';
 import 'package:Wallpaper/widgets.dart/widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -43,9 +44,15 @@ class _CategoriesState extends State<Categories> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: brandName(),
         elevation: 0.0,
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(
+          color: Colors.black
+        ) ,
       ),
       body: SingleChildScrollView(
         //controller: controller,
