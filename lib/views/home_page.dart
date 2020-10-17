@@ -8,10 +8,10 @@ import 'package:Wallpaper/views/categories.dart';
 import 'package:Wallpaper/views/search.dart';
 import 'package:Wallpaper/widgets.dart/widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:Wallpaper/data/my_info.dart';
-
 
 class HomePage extends StatefulWidget {
   @override
@@ -34,17 +34,14 @@ class _HomePageState extends State<HomePage> {
     var url =
         "https://api.pexels.com/v1/curated?per_page=$noOfImageToLoad&page=4";
     //   https://api.pexels.com/v1/curated?per_page=$noOfImageToLoad&page=$page
-     await http
-        .get(url, headers: {"Authorization": apiKey}).then((response) {
-          
-    Map<String, dynamic> jsonData = jsonDecode(response.body);
-    jsonData["photos"].forEach((element) {
-      //print(element);
-      WallpaperModel wallpaperModel = new WallpaperModel();
-      wallpaperModel = WallpaperModel.fromMap(element);
-      wallpapers.add(wallpaperModel);
-        });
-
+    await http.get(url, headers: {"Authorization": apiKey}).then((response) {
+      Map<String, dynamic> jsonData = jsonDecode(response.body);
+      jsonData["photos"].forEach((element) {
+        //print(element);
+        WallpaperModel wallpaperModel = new WallpaperModel();
+        wallpaperModel = WallpaperModel.fromMap(element);
+        wallpapers.add(wallpaperModel);
+      });
 
       //print(response.body.toString());
     });
@@ -68,41 +65,37 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    ;
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(        
+      appBar: AppBar(
         title: brandName(),
         elevation: 0.0,
         centerTitle: true,
-        backgroundColor: Colors.white70,        
+        backgroundColor: Colors.white70,
       ),
-
       body: SafeArea(
-        top: true,
-        right: true,
-        left: true,
         child: SingleChildScrollView(
-
           child: Container(
             color: Colors.white70,
             child: Column(
               children: <Widget>[
                 Container(
                   decoration: BoxDecoration(
-                    color: Colors.grey[100],
-                    //Color(0xfff5f8fd)
-                    //borderRadius: BorderRadius.circular(10),
-                    borderRadius: BorderRadius.circular(50),
-                    border: Border.all(color: Colors.grey.withOpacity(0.1))
-                  ),
+                      color: Colors.grey[100],
+                      //Color(0xfff5f8fd)
+                      //borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(50),
+                      border: Border.all(color: Colors.grey.withOpacity(0.1))),
                   padding: EdgeInsets.symmetric(horizontal: 20),
-                  margin: EdgeInsets.only(right: 10,left: 10,top: 10),
+                  margin: EdgeInsets.only(right: 10, left: 10, top: 10),
                   child: Row(
                     children: <Widget>[
                       Expanded(
                         child: TextField(
                           controller: searchController,
-                          decoration: InputDecoration(hintText: "search", border: InputBorder.none),
+                          decoration: InputDecoration(
+                              hintText: "search", border: InputBorder.none),
                         ),
                       ),
                       InkWell(
@@ -125,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 SizedBox(
                   height: 15,
-                  ),
+                ),
                 Container(
                   height: 60,
                   child: ListView.builder(
@@ -143,9 +136,13 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 wallpapersList(wallpapers: wallpapers, context: context),
-                SizedBox(height: 25,),
+                SizedBox(
+                  height: 25,
+                ),
                 InfoScreen(),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
               ],
             ),
           ),
