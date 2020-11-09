@@ -65,85 +65,87 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    ;
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: brandName(),
-        elevation: 0.0,
-        centerTitle: true,
-        backgroundColor: Colors.white70,
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-            color: Colors.white70,
-            child: Column(
-              children: <Widget>[
-                Container(
-                  decoration: BoxDecoration(
-                      color: Colors.grey[100],
-                      //Color(0xfff5f8fd)
-                      //borderRadius: BorderRadius.circular(10),
-                      borderRadius: BorderRadius.circular(50),
-                      border: Border.all(color: Colors.grey.withOpacity(0.1))),
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  margin: EdgeInsets.only(right: 10, left: 10, top: 10),
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: TextField(
-                          controller: searchController,
-                          decoration: InputDecoration(
-                              hintText: "search", border: InputBorder.none),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Search(
-                                        searchQuery: searchController.text,
-                                      )));
-                        },
-                        child: Container(
-                          child: Icon(
-                            Icons.search,
+    
+    return SafeArea(
+          child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          title: brandName(),
+          elevation: 0.0,
+          centerTitle: true,
+          backgroundColor: Colors.white70,
+        ),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Container(
+              color: Colors.white70,
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.grey[100],
+                        //Color(0xfff5f8fd)
+                        //borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(50),
+                        border: Border.all(color: Colors.grey.withOpacity(0.1))),
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    margin: EdgeInsets.only(right: 10, left: 10, top: 10),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: TextField(
+                            controller: searchController,
+                            decoration: InputDecoration(
+                                hintText: "search", border: InputBorder.none),
                           ),
                         ),
-                      ),
-                    ],
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Search(
+                                          searchQuery: searchController.text,
+                                        )));
+                          },
+                          child: Container(
+                            child: Icon(
+                              Icons.search,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                Container(
-                  height: 60,
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    itemCount: categories.length,
-                    physics: ClampingScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return CategoriesTile(
-                        title: categories[index].categoriesName,
-                        imgUrl: categories[index].imgUrl,
-                      );
-                    },
+                  SizedBox(
+                    height: 15,
                   ),
-                ),
-                wallpapersList(wallpapers: wallpapers, context: context),
-                SizedBox(
-                  height: 25,
-                ),
-                InfoScreen(),
-                SizedBox(
-                  height: 20,
-                ),
-              ],
+                  Container(
+                    height: 60,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      itemCount: categories.length,
+                      physics: ClampingScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return CategoriesTile(
+                          title: categories[index].categoriesName,
+                          imgUrl: categories[index].imgUrl,
+                        );
+                      },
+                    ),
+                  ),
+                  wallpapersList(wallpapers: wallpapers, context: context),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  InfoScreen(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

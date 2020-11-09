@@ -16,24 +16,24 @@ Widget brandName() {
     ],
   );*/
 
-  return  Container(
-    //margin: EdgeInsets.only(top: 25,),
-    child: RichText(
-      text: TextSpan(
-        children: <TextSpan>[
-          TextSpan(
-              text: 'Wallpaper',
-              style: GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 20, color: Colors.black)),
-          TextSpan(
-              text: 'App',
-              style: GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 20, color: Colors.blue)),
-        ],
+  return  SafeArea(
+      child: Container(
+      //margin: EdgeInsets.only(top: 25,),
+      child: RichText(
+        text: TextSpan(
+          children: <TextSpan>[
+            TextSpan(
+                text: 'Wallpaper',
+                style: GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 20, color: Colors.black)),
+            TextSpan(
+                text: 'App',
+                style: GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 20, color: Colors.blue)),
+          ],
+        ),
       ),
     ),
   );
-
 }
-
 Widget wallpapersList({List<WallpaperModel> wallpapers, context}) {
   return Container(
     child: GridView.count(
@@ -53,20 +53,22 @@ Widget wallpapersList({List<WallpaperModel> wallpapers, context}) {
                     MaterialPageRoute(
                         builder: (context) => ImageView(
                               imgUrl: wallpaper.src.portrait,
-                            )));
-              },
-              child: Hero(
-                tag: wallpaper.src.portrait,
-                child: Container(
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(16),
-                        child: Container(
-                          child: CachedNetworkImage(
-                            imageUrl: wallpaper.src.portrait,
-                            fit: BoxFit.cover,
-                            placeholder: (context , url) => Center(child: CircularProgressIndicator()),
-                            //progressIndicatorBuilder: CircularProgressIndicator(),
-                          ),
+                            )
+                          )
+                        );
+                      },
+            child: Hero(
+              tag: wallpaper.src.portrait,
+              child: Container(
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: Container(
+                      child: CachedNetworkImage(
+                        imageUrl: wallpaper.src.portrait,
+                        fit: BoxFit.cover,
+                        placeholder: (context , url) => Center(child: CircularProgressIndicator()),
+                        //progressIndicatorBuilder: CircularProgressIndicator(),
+                      ),
                         )
                     ),
                 ),
