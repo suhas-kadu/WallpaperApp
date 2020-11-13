@@ -1,12 +1,12 @@
-//import 'dart:ui';
 import 'dart:typed_data';
 import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 //import 'package:url_launcher/url_launcher.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 //import 'package:random_string/random_string.dart';
-import 'package:dio/dio.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -21,7 +21,6 @@ class ImageView extends StatefulWidget {
 
 class _ImageViewState extends State<ImageView> {
   var filePath;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,17 +29,17 @@ class _ImageViewState extends State<ImageView> {
           Hero(
             tag: widget.imgUrl,
             child: Container(
-                //Height of mobile display
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
-                child: CachedNetworkImage(
-                  imageUrl: widget.imgUrl,
-                  fit: BoxFit.cover,
-                  //placeholder: (context, url) => Center(child: CircularProgressIndicator()),
-                  //color: Color(0xfff5f8fd),
-                  //progressIndicatorBuilder: CircularProgressIndicator(context ),
-                ),
-                ),
+              //Height of mobile display
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              child: CachedNetworkImage(
+                imageUrl: widget.imgUrl,
+                fit: BoxFit.cover,
+                //placeholder: (context, url) => Center(child: CircularProgressIndicator()),
+                //color: Color(0xfff5f8fd),
+                //progressIndicatorBuilder: CircularProgressIndicator(context ),
+              ),
+            ),
           ),
           Container(
             height: MediaQuery.of(context).size.height,
@@ -73,27 +72,30 @@ class _ImageViewState extends State<ImageView> {
                       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                       //width : 300
                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.white60.withOpacity(0.4), width: 1),
+                          border: Border.all(
+                              color: Colors.white60.withOpacity(0.4), width: 1),
                           borderRadius: BorderRadius.circular(30),
-                          gradient: LinearGradient(colors: [
-                            Colors.black26,
-                            Colors.black38,
-                            Colors.black26,
-                          ],
-                          )
-                          ),
+                          gradient: LinearGradient(
+                            colors: [
+                              Colors.black26,
+                              Colors.black38,
+                              Colors.black26,
+                            ],
+                          )),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
                             "Set Wallpaper",
-                            style:
-                                GoogleFonts.roboto(color: Colors.white70, fontSize: 16,),
+                            style: GoogleFonts.roboto(
+                              color: Colors.white70,
+                              fontSize: 16,
+                            ),
                           ),
                           Text(
                             "Image will be saved in Gallery",
-                            style:
-                                GoogleFonts.roboto(color: Colors.white70, fontSize: 12),
+                            style: GoogleFonts.roboto(
+                                color: Colors.white70, fontSize: 12),
                           )
                         ],
                       ),
@@ -110,8 +112,10 @@ class _ImageViewState extends State<ImageView> {
                     child: Container(
                         child: Text(
                       "Cancel",
-                      style: GoogleFonts.roboto(color: Colors.white,fontSize: 16,),
-                    
+                      style: GoogleFonts.roboto(
+                        color: Colors.white,
+                        fontSize: 16,
+                      ),
                     ))),
                 SizedBox(
                   height: 30,
@@ -126,23 +130,34 @@ class _ImageViewState extends State<ImageView> {
 
   _save() async {
     await _askPermission();
-    var response = await Dio().get(widget.imgUrl,
-        options: Options(responseType: ResponseType.bytes));
+    var response = await Dio()
+        .get(widget.imgUrl, options: Options(responseType: ResponseType.bytes));
     final result =
         await ImageGallerySaver.saveImage(Uint8List.fromList(response.data));
     print(result);
+    if(result == ""){  Fluttertoast.showToast(msg: "Give Storage persmissions from Settings");
+    }
+    if (result != null) {
+      Fluttertoast.showToast(msg: "Image Saved in Gallery");
+    } 
+    
+    else {
+      Fluttertoast.showToast(msg: "Give Storage persmissions from Settings");
+    }
+
     Navigator.pop(context);
   }
 
   _askPermission() async {
-    if (Platform.isIOS) {
-      Map<PermissionGroup, PermissionStatus> permissions =
-          await PermissionHandler()
-              .requestPermissions([PermissionGroup.photos]);
+    if (Platform.isAndroid) {
+      await PermissionHandler().requestPermissions([PermissionGroup.storage]);
+    } else if (Platform.isIOS) {
+      /*Map<PermissionGroup, PermissionStatus> permissions =
+          */
+      await PermissionHandler().requestPermissions([PermissionGroup.photos]);
     } else {
-     PermissionStatus permission = await PermissionHandler()
+      /* PermissionStatus permission = */ await PermissionHandler()
           .checkPermissionStatus(PermissionGroup.storage);
     }
   }
-  
 }
