@@ -33,17 +33,17 @@ class _SearchState extends State<Search> {
     });
     //print(response.body.toString());
 
-    
+    setState(() {});    
     });
-    setState(() {});
+    
   }
 
   @override
   void initState() {
     
     getSearchWallpapers(widget.searchQuery);
-    super.initState();
     searchController.text = widget.searchQuery;
+    super.initState();
   }
 
   @override
