@@ -8,7 +8,6 @@ import 'package:Wallpaper/views/categories.dart';
 import 'package:Wallpaper/views/search.dart';
 import 'package:Wallpaper/widgets.dart/widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:Wallpaper/data/my_info.dart';
@@ -32,7 +31,7 @@ class _HomePageState extends State<HomePage> {
 
   getTrendingWallpapers() async {
     var url =
-        "https://api.pexels.com/v1/curated?per_page=$noOfImageToLoad&page=4";
+        "https://api.pexels.com/v1/curated?per_page=$noOfImageToLoad&page=1";
     //   https://api.pexels.com/v1/curated?per_page=$noOfImageToLoad&page=$page
     await http.get(url, headers: {"Authorization": apiKey}).then((response) {
       Map<String, dynamic> jsonData = jsonDecode(response.body);
@@ -66,20 +65,20 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     
-    return SafeArea(
-          child: Scaffold(
+    return Scaffold(
+      
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: brandName(),
-          elevation: 0.0,
-          centerTitle: true,
-          backgroundColor: Colors.white70,
+    title: brandName(),
+    elevation: 0.0,
+    centerTitle: true,
+    backgroundColor: Colors.white70,
         ),
         body: SafeArea(
-          child: SingleChildScrollView(
-            child: Container(
-              color: Colors.white70,
-              child: Column(
+                  child: Container(
+                    height: MediaQuery.of(context).size.height,
+                    child: SingleChildScrollView(
+                      child: Column(
                 children: <Widget>[
                   Container(
                     decoration: BoxDecoration(
@@ -96,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                           child: TextField(
                             controller: searchController,
                             decoration: InputDecoration(
-                                hintText: "search", border: InputBorder.none),
+                                hintText: "Search", border: InputBorder.none),
                           ),
                         ),
                         InkWell(
@@ -121,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                     height: 15,
                   ),
                   Container(
-                    height: 60,
+                    height: 65,
                     child: ListView.builder(
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
@@ -146,11 +145,10 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
-            ),
-          ),
+                    ),
+                  ),
         ),
-      ),
-    );
+      );
   }
 }
 
@@ -170,7 +168,7 @@ class CategoriesTile extends StatelessWidget {
                     )));
       },
       child: Container(
-        height: 60,
+        height: 65,
         width: 120,
         margin: EdgeInsets.only(right: 5),
         child: Stack(
@@ -179,7 +177,7 @@ class CategoriesTile extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
               child: Image.network(
                 imgUrl,
-                height: 60,
+                height: 65,
                 width: 120,
                 fit: BoxFit.cover,
               ),
@@ -195,7 +193,8 @@ class CategoriesTile extends StatelessWidget {
                   title,
                   style: GoogleFonts.roboto(
                     color: Colors.white,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
                   ),
                 ),
               ),
