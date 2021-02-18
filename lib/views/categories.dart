@@ -19,7 +19,7 @@ class _CategoriesState extends State<Categories> {
   List<WallpaperModel> wallpapers = new List();
   getSearchWallpapers() async {
     var url =
-        "https://api.pexels.com/v1/search?query=${widget.CategorieName}&per_page=30&page=2";
+        "https://api.pexels.com/v1/search?query=${widget.CategorieName}&per_page=30&page=1";
     var response = await http.get(url, headers: {"Authorization": apiKey}).then((response) {
       
     Map<String, dynamic> jsonData = jsonDecode(response.body);

@@ -7,32 +7,30 @@ import 'package:cached_network_image/cached_network_image.dart';
 //import 'package:url_launcher/url_launcher.dart';
 
 Widget brandName() {
-  /*
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.center,
+  
+  return Wrap(
+    //mainAxisAlignment: MainAxisAlignment.center,
     children: <Widget>[
-      Text("Wallpaper",style: GoogleFonts.roboto(color: Colors.blue )),
-      Text("App",style: GoogleFonts.roboto(color: Colors.black )),
+      Text("Wallpaper",style: GoogleFonts.roboto(color: Colors.blue, fontSize: 20, fontWeight: FontWeight.w500)),
+      Text("App",style: GoogleFonts.roboto(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w500 )),
     ],
-  );*/
-
-  return  SafeArea(
-      child: Container(
-      //margin: EdgeInsets.only(top: 25,),
-      child: RichText(
-        text: TextSpan(
-          children: <TextSpan>[
-            TextSpan(
-                text: 'Wallpaper',
-                style: GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 20, color: Colors.black)),
-            TextSpan(
-                text: 'App',
-                style: GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 20, color: Colors.blue)),
-          ],
-        ),
-      ),
-    ),
   );
+
+  // return  Container(
+  // //margin: EdgeInsets.only(top: 25,),
+  // child: RichText(
+  //   text: TextSpan(
+  //     children: <TextSpan>[
+  //       TextSpan(
+  //           text: 'Wallpaper',
+  //           style: GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 20, color: Colors.black)),
+  //       TextSpan(
+  //           text: 'App',
+  //           style: GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 20, color: Colors.blue)),
+  //     ],
+  //   ),
+  // ),
+  //   );
 }
 Widget wallpapersList({List<WallpaperModel> wallpapers, context}) {
   return Container(
